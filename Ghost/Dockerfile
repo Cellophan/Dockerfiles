@@ -15,7 +15,7 @@ WORKDIR /app
 ENV NODE_ENV production
 # Install app dependencies
 RUN apt-get -qy install git unzip
-COPY ghost-latest.zip /tmp/ghost-latest.zip
+RUN wget -P /tmp/ https://ghost.org/zip/ghost-latest.zip
 RUN \
   unzip /tmp/ghost-latest.zip -d /app && \
   rm -f /tmp/ghost-latest.zip && \

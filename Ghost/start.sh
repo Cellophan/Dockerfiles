@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 if [ -d '/external' ]; then
+  chown -R app. /external
   for src in `find /external/ -mindepth 1 -maxdepth 1 -type d`; do
     dest="/app/content/`echo $src | sed 's/\/external\///'`"
     echo Linking $src to $dest
@@ -15,7 +16,7 @@ if [ -d '/external' ]; then
 fi
 
 echo "IP: `facter ipaddress`"
-chown -R app. /app /external
+chown -R app. /app
 su app << EOF
   cd /app
   npm start

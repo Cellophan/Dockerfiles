@@ -11,7 +11,6 @@ ENV GO_SERVER_PORT 8153
 RUN apt-get update; apt-get install -qy wget java7-runtime-headless procps git
 
 RUN wget -qO- https://get.docker.com/ | sh
-VOLUME /var/run/docker.sock
 
 RUN wget -O /tmp/go-agent.deb ${GO_DOWNLOAD_URL}
 RUN dpkg -i /tmp/go-agent.deb && rm -f /tmp/go-agent.deb
@@ -23,11 +22,10 @@ RUN sed -i '/.*GO_SERVER_PORT.*/d' /etc/default/go-agent
 RUN echo "agent.auto.register.key=${GO_KEY}\n" >/var/lib/go-agent/config/autoregister.properties
 
 RUN echo "#!/bin/bash -e\n\
-  [ -d /var/run/docker.sock ] && echo "/var/run/docker.sock is not mounted" && exit 1
+  [ ! -e /var/run/docker.sock ] && echo "/var/run/docker.sock is not mounted. You need -v /var/run/docker.sock:/var/run/docker.sock" && exit 1\n\
   service go-agent start\n\
   tail -f /var/log/go-agent/*\n\
   " >/start.sh
 RUN chmod u+x /start.sh
 
 CMD /start.sh
-

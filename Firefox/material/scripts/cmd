@@ -1,0 +1,14 @@
+#!/bin/bash
+#Provide the default parameters used by the image.
+
+echo -n "docker run -ti --rm \
+	-h \$(basename \${0}) \
+	-w \$PWD -v \$PWD:\$PWD \
+	-v /etc/localtime:/etc/localtime:ro \
+	-v \$HOME/.ssh:\$HOME/.ssh \
+	-e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
+	-e USER -e UID=\$(id --user) -e GID=\$(id --group) \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	$@ \
+	${DOCKER_IMAGE}"
+

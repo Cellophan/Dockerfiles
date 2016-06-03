@@ -8,5 +8,6 @@ RUN	apt-get update &&\
 	apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 ADD material/scripts	/usr/local/bin/
+ADD material/payload	/opt/payload
 
 

@@ -2,13 +2,13 @@
 
 if [ -z "$1" ]; then
 	echo "Need the docker network as argument" >&2
-	return 1
+	exit 1
 fi
 
 net=$(docker network ls --quiet --filter name=$1)
 if [ $(echo "$net" | wc -l) -ne 1 ]; then
 	echo "The docker network $1 can not be found" >&2
-	return 1
+	exit 1
 fi
 shift
 

@@ -1,10 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
+set_client_pbr() {
+  echo
+}
 
-[ -d /dev/net ] ||
-	mkdir -p /dev/net
-[ -c /dev/net/tun ] ||
-	mknod /dev/net/tun c 10 200
+check_client_network() {
+  echo
+  #docker network --driver local vpn_client
+}
 
+start_vpn() {
+  CONF_DIR="${PWD}/conf"
+  docker run --rm -ti \
+    -v ${CONF_DIR}:${CONF_DIR}:ro -w ${CONF_DIR} \
+    --cap-add NET_ADMIN --cap-add MKNOD \
+    cell/openvpn
+}
 
+main() {
+  start_vpn
+}
+
+main $@

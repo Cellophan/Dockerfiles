@@ -1,11 +1,17 @@
 #!/bin/bash
 
+set -e
+
+NETWORK_NAME="vpn"
+
 set_client_pbr() {
   echo
 }
 
 check_client_network() {
-  echo
+  if [[ $(docker network inspect ${NETWORK_NAME} 2>&1 > ) ]]; then
+echo
+  fi
   #docker network --driver local vpn_client
 }
 

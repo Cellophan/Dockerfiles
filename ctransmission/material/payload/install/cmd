@@ -1,0 +1,14 @@
+#!/bin/bash
+#Provide the default parameters used by the image.
+
+echo -n "\
+	[[ -n \"\$DISPLAY\"       ]] && display='-e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix'; \
+	docker run -ti --rm \
+		-v \"\$HOME/Download\":\"\$HOME/Desktop\" \
+		-v \"\$HOME/Download\":\"\$HOME/Download\" \
+		-v /etc/localtime:/etc/localtime:ro \
+		-e USER -e UID=\$(id --user) -e GID=\$(id --group) \
+		\${display:-} \
+		--net container:ovpn \
+		$@ \
+		${DOCKER_IMAGE}"

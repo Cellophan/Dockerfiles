@@ -7,5 +7,6 @@ RUN apt-get update &&\
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 #Material
+COPY material/scripts    /usr/local/bin/
 COPY material/payload    /opt/payload/
 

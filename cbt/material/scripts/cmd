@@ -4,11 +4,7 @@
 echo -n "\
 	[[ -n \"\$DISPLAY\"       ]] && display='-e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix'; \
 	docker run -ti --rm \
-		-v \"\$HOME/Transmission\":\"\$HOME/Desktop\" \
-		-v \"\$HOME/Transmission\":\"\$HOME/Downloads\" \
-    -v \"\$HOME/Transmission/.cache\":\"\$HOME/.cache\" \
-    -v \"\$HOME/Transmission/.config\":\"\$HOME/.config\" \
-    -v \"\$HOME/Transmission/.local\":\"\$HOME/.local\" \
+		-v \"/media/cell/RobotShark/btc\":\"\$HOME/.bitcoin\" \
 		-v /etc/localtime:/etc/localtime:ro \
 		-e USER -e UID=\$(id --user) -e GID=\$(id --group) \
 		\${display:-} \
